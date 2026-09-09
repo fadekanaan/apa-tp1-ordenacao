@@ -41,8 +41,8 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
     right = n - 1
 
     while left < right:
-        min = left
-        max = right
+        min_idx = left
+        max_idx = right
         is_sorted = True
 
         for j in range(left, right + 1):
@@ -55,12 +55,12 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
 
             # Encontrar o valor máximo e mínimo da janela
             comps += 1
-            if a[j] < a[min]:
-                min = j
+            if a[j] < a[min_idx]:
+                min_idx = j
             else: 
                 comps += 1
-                if a[j] > a[max]:
-                    max = j
+                if a[j] > a[max_idx]:
+                    max_idx = j
 
         # Se já estava ordenada, encerra
         if is_sorted:
@@ -68,21 +68,21 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
 
          # Se o mínimo e o máximo forem iguais, significa que todos os elementos da janela são iguais
         comps += 1
-        if a[min] == a[max]:
+        if a[min_idx] == a[max_idx]:
             break
 
         # Trocar o mínimo com o elemento da esquerda
-        if min != left:
-            a[left], a[min] = a[min], a[left]
+        if min_idx != left:
+            a[left], a[min_idx] = a[min_idx], a[left]
             moves += 2
 
             # Ajustar o índice do máximo se ele foi movido, caso o máximo estivesse na posição da esquerda, ele agora está na posição do mínimo
-            if max == left:
-                max = min
+            if max_idx == left:
+                max_idx = min_idx
 
         # Trocar o máximo com o elemento da direita
-        if max != right:
-            a[right], a[max] = a[max], a[right]
+        if max_idx != right:
+            a[right], a[max_idx] = a[max_idx], a[right]
             moves += 2
 
         left += 1
