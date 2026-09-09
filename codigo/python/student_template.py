@@ -30,23 +30,40 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
     comps = 0
     moves = 0
 
-    # =========================================================================
-    # TODO: Escreva sua lógica autoral aqui.
-    # Exemplo temporário (substitua pelo seu algoritmo):
-    for i in range(1, n):
-        key = a[i]
-        moves += 1
-        j = i - 1
-        while j >= 0:
+    # Algoritmo autoral de ordenação, combinação de bubble sort com selection sort, 
+    # basicamente é feita uma pinça, pegando o menor e o maior elemento da lista e 
+    # colocando eles nas extremidades, depois repetindo o processo com a sublista restante.
+    left = 0
+    right = n - 1
+    min = left
+    max = right
+    for i in range(n):
+        # Encontrar o mínimo e máximo na sublista
+        for j in range(left, right + 1):
             comps += 1
-            if a[j] > key:
-                a[j + 1] = a[j]
-                moves += 1
-                j -= 1
-            else:
-                break
-        a[j + 1] = key
-        moves += 1
+            if a[j] < a[min]:
+                min = j
+            elif a[j] > a[max]:
+                max = j
+
+        # Trocar o mínimo com o elemento da esquerda
+        if min != left:
+            a[left], a[min] = a[min], a[left]
+            moves += 1
+
+        # Ajustar o índice do máximo se ele foi movido
+        if max == left:
+            max = min
+
+        # Trocar o máximo com o elemento da direita
+        if max != right:
+            a[right], a[max] = a[max], a[right]
+            moves += 1
+
+        left += 1
+        right -= 1
+        
+        
     # =========================================================================
 
     return a, comps, moves
