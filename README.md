@@ -62,11 +62,11 @@ apa-tp1-ordenacao/
 Valida o comportamento dos algoritmos contra cenários de borda (vazio, elemento único, ordenado, estritamente reverso, duplicados e aleatórios):
 
 ```bash
-# Executar suíte de testes via Python
-python3 codigo/python/test_suite.py
+# Executar suíte de testes via UV
+uv run python codigo/python/test_suite.py
 
 # Ou via Makefile
-make -C codigo test_python
+make -C codigo test
 ```
 
 ### 2. Benchmarks e Comparação de Desempenho
@@ -75,10 +75,10 @@ Executa a bateria de medições estatísticas com tamanhos crescentes de entrada
 
 ```bash
 # Executar benchmark estatístico
-python3 codigo/python/benchmark.py --trials 3 --plot benchmark_results.png
+uv run python codigo/python/benchmark.py --trials 3 --plot benchmark_results.png
 
 # Ou via Makefile
-make -C codigo benchmark_python
+make -C codigo benchmark
 ```
 
 ---
