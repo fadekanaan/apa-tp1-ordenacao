@@ -42,14 +42,14 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
 
     while left < right:
         min_idx = left
-        max_idx = right
+        max_idx = left
         is_sorted = True
 
         for j in range(left, right + 1):
 
             # Verifica a janela para detectar se a lista já não está ordenada
-            comps += 1
             if j < right:
+                comps += 1
                 if a[j] > a[j + 1]:
                     is_sorted = False
 

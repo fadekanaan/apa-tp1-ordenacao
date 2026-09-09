@@ -15,6 +15,7 @@ from classical import (
     quick_sort,
     selection_sort,
 )
+from dsb_sort import dsb_sort
 
 
 class BaseSortMixin:
@@ -121,6 +122,11 @@ class TestQuickSort(unittest.TestCase, BaseSortMixin):
 class TestAuthorialSort(unittest.TestCase, BaseSortMixin):
     sort_fn = staticmethod(dpes_sort)
     name = "Authorial Sort (DPES)"
+
+
+class TestDSBSort(unittest.TestCase, BaseSortMixin):
+    sort_fn = staticmethod(dsb_sort)
+    name = "Dual Selection Bubble Sort (DSB Sort)"
 
 
 if __name__ == "__main__":
