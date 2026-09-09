@@ -3,10 +3,10 @@
 all: test
 
 test:
-	python3 python/test_suite.py
+	uv run python python/test_suite.py
 
 benchmark:
-	python3 python/benchmark.py --trials 3 --plot benchmark_results.png
+	uv run python python/benchmark.py --trials 3 --plot benchmark_results.png
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
