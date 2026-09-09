@@ -29,7 +29,7 @@ codigo/
 * **Executar testes em Python:**
   ```bash
   make test
-  # ou: python3 python/test_suite.py
+  # ou: uv run python python/test_suite.py
   ```
 
 ---
@@ -39,20 +39,20 @@ codigo/
 * **Executar benchmarks em Python (Gera tabelas Markdown e o gráfico `benchmark_results.png`):**
   ```bash
   make benchmark
-  # ou: python3 python/benchmark.py --trials 3 --plot benchmark_results.png
+  # ou: uv run python python/benchmark.py --trials 3 --plot benchmark_results.png
   ```
 
 ---
 
 ## 🧑‍💻 Guia para o Aluno (Como usar o template)
 
-1. Abra o arquivo [`python/student_template.py`](file:///home/fade/projects/apa-tp1-ordenacao/codigo/python/student_template.py).
+1. Abra o arquivo [`python/student_template.py`](file:///home/thoma/workspace/apa-tp1-ordenacao/codigo/python/student_template.py).
 2. Escreva a lógica do seu algoritmo na função `my_authorial_sort(arr)`.
 3. Certifique-se de incrementar os contadores de comparações (`comps`) e movimentações (`moves`).
 4. Execute o arquivo diretamente para validar seu algoritmo contra a suíte de testes:
    ```bash
-   python3 python/student_template.py
+   uv run python python/student_template.py
    ```
 5. Para comparar seu algoritmo diretamente contra a literatura no benchmark gráfico:
    * Importe seu método no `python/benchmark.py` e adicione ao dicionário `algorithms`.
-   * Execute `python3 python/benchmark.py` para gerar as curvas de tempo e comparações para o seu relatório ou apresentação!
+   * Execute `uv run python python/benchmark.py` para gerar as curvas de tempo e comparações para o seu relatório ou apresentação!
