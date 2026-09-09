@@ -48,23 +48,26 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
         for j in range(left, right + 1):
 
             # Verifica a janela para detectar se a lista já não está ordenada
+            comps += 1
             if j < right:
                 if a[j] > a[j + 1]:
                     is_sorted = False
-                    comps += 1
 
             # Encontrar o valor máximo e mínimo da janela
             comps += 1
             if a[j] < a[min]:
                 min = j
-            elif a[j] > a[max]:
-                max = j
+            else: 
+                comps += 1
+                if a[j] > a[max]:
+                    max = j
 
         # Se já estava ordenada, encerra
         if is_sorted:
             break
 
          # Se o mínimo e o máximo forem iguais, significa que todos os elementos da janela são iguais
+        comps += 1
         if a[min] == a[max]:
             break
 
