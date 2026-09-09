@@ -10,9 +10,13 @@ import random
 import time
 from typing import Callable, Dict, List, Tuple
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
+try:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    HAS_MATPLOTLIB = True
+except ImportError:
+    HAS_MATPLOTLIB = False
 
 from authorial import dpes_sort
 from classical import (
@@ -22,6 +26,7 @@ from classical import (
     quick_sort,
     selection_sort,
 )
+from dsb_sort import dsb_sort
 
 
 def generate_dataset(n: int, distribution: str) -> List[int]:
@@ -67,8 +72,8 @@ def run_benchmark(
             datasets = [generate_dataset(size, dist) for _ in range(trials)]
 
             for name, fn in algorithms.items():
-                # Para Bubble/Selection/Insertion, evita tamanhos excessivos que demoram muito
-                if size > 1500 and name in ("Bubble Sort", "Selection Sort", "Insertion Sort") and dist in ("random", "reverse"):
+                # Para Bubble/Selection/Insertion/DSB, evita tamanhos excessivos que demoram muito
+                if size > 1500 and name in ("Bubble Sort", "Selection Sort", "Insertion Sort", "DSB Sort (Autoral 1)") and dist in ("random", "reverse"):
                     continue
 
                 times = []
@@ -117,6 +122,12 @@ def print_markdown_summary(results: dict, sizes: List[int]):
 
 def plot_benchmark_results(results: dict, output_path: str = "benchmark_results.png"):
     """Gera gráficos de curvas de tempo e comparações usando matplotlib."""
+    if not HAS_MATPLOTLIB:
+        print("\n⚠️ Aviso: 'matplotlib' não está disponível no interpretador atual.")
+        print("As tabelas estatísticas em Markdown foram geradas com sucesso.")
+        print("Dica: Para gerar o arquivo de imagem PNG, instale 'matplotlib' no sistema.\n")
+        return
+
     distributions = list(results.keys())
     fig, axes = plt.subplots(len(distributions), 2, figsize=(14, 4 * len(distributions)))
 
@@ -164,7 +175,7 @@ def main():
         "Insertion Sort": insertion_sort,
         "Merge Sort": merge_sort,
         "Quick Sort": quick_sort,
-        "Authorial (DPES)": dpes_sort,
+        "DSB Sort (Autoral 1)": dsb_sort,
     }
 
     sizes = [10, 50, 100, 250, 500, 1000]
