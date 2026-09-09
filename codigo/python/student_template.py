@@ -14,7 +14,9 @@ import unittest
 
 def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
     """
-    IMPLEMENTE AQUI SEU ALGORITMO AUTORAL.
+    Dual Selection Bubble Sort (DSB Sort).
+    Combina a seleção simultânea de extremos (mínimo e máximo) com
+    detecção de inversões locais e parada antecipada do Bubble Sort.
 
     Parâmetros:
         arr (List[Any]): Lista de entrada a ser ordenada.
@@ -33,32 +35,52 @@ def my_authorial_sort(arr: List[Any]) -> Tuple[List[Any], int, int]:
     # Algoritmo autoral de ordenação, combinação de bubble sort com selection sort, 
     # basicamente é feita uma pinça, pegando o menor e o maior elemento da lista e 
     # colocando eles nas extremidades, depois repetindo o processo com a sublista restante.
+    # Ele verifica se a janela já está ordenada ou possui elementos iguais,
+    # em qualquer um dos casos, ele encerra a busca.
     left = 0
     right = n - 1
-    min = left
-    max = right
-    for i in range(n):
-        # Encontrar o mínimo e máximo na sublista
+
+    while left < right:
+        min = left
+        max = right
+        is_sorted = True
+
         for j in range(left, right + 1):
+
+            # Verifica a janela para detectar se a lista já não está ordenada
+            if j < right:
+                if a[j] > a[j + 1]:
+                    is_sorted = False
+                    comps += 1
+
+            # Encontrar o valor máximo e mínimo da janela
             comps += 1
             if a[j] < a[min]:
                 min = j
             elif a[j] > a[max]:
                 max = j
 
+        # Se já estava ordenada, encerra
+        if is_sorted:
+            break
+
+         # Se o mínimo e o máximo forem iguais, significa que todos os elementos da janela são iguais
+        if a[min] == a[max]:
+            break
+
         # Trocar o mínimo com o elemento da esquerda
         if min != left:
             a[left], a[min] = a[min], a[left]
-            moves += 1
+            moves += 2
 
-        # Ajustar o índice do máximo se ele foi movido
-        if max == left:
-            max = min
+            # Ajustar o índice do máximo se ele foi movido, caso o máximo estivesse na posição da esquerda, ele agora está na posição do mínimo
+            if max == left:
+                max = min
 
         # Trocar o máximo com o elemento da direita
         if max != right:
             a[right], a[max] = a[max], a[right]
-            moves += 1
+            moves += 2
 
         left += 1
         right -= 1
