@@ -26,21 +26,27 @@ codigo/
 
 ### 1. Suíte de Testes Obrigatória
 
-* **Executar testes em Python:**
+* **Executar as duas suítes (88 testes: obrigatória + específica autoral):**
   ```bash
   make test
-  # ou: uv run python python/test_suite.py
+  # ou: uv run python -m unittest discover -s python -p 'test_*.py'
+  ```
+
+* **Executar apenas a suíte obrigatória (80 testes):**
+  ```bash
+  uv run python python/test_suite.py
   ```
 
 ---
 
 ### 2. Benchmarks e Comparação de Desempenho
 
-* **Executar benchmarks em Python (Gera tabelas Markdown e o gráfico `benchmark_results.png`):**
+* **Executar benchmarks (gera as tabelas Markdown do relatório e o gráfico):**
   ```bash
   make benchmark
-  # ou: uv run python python/benchmark.py --trials 3 --plot benchmark_results.png
   ```
+  O gráfico é gravado em `benchmark_results.png` **na raiz do repositório** — o mesmo
+  caminho referenciado pela Figura 1 do relatório.
 
 ---
 
