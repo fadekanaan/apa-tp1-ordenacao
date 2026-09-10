@@ -54,8 +54,7 @@ apa-tp1-ordenacao/
 │   ├── enunciado_tp1.md                        # Enunciado completo do trabalho
 │   └── sintese_teorica_ordenacao_apa.md        # Síntese teórica sobre ordenação
 └── relatorio/                                  # Documentação analítica
-    ├── relatorio_tp1.md                        # Relatório técnico do DSB Sort
-    └── relatorio_tp1_algoritmo2_vakm_sort.md   # Relatório técnico do VAKM Sort
+    └── relatorio_tp1.md                        # Relatório técnico completo unificado (DSB Sort & VAKM Sort)
 ```
 
 ---
