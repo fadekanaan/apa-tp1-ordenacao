@@ -1,7 +1,11 @@
 """
-Algoritmo Autoral de Referência: Dual-Pivot Extremes Sieve Sort (DPES).
+ALGORITMO DE REFERÊNCIA (FORNECIDO PELO PROFESSOR NO PACOTE BASE DO TP1)
+Algoritmo: Dual-Pivot Extremes Sieve Sort (DPES).
 
-Raciocínio Projetual:
+Nota: Este arquivo foi disponibilizado pelo professor como exemplo de referência no repositório inicial do trabalho.
+Os algoritmos autorais desenvolvidos e analisados pelo grupo são o DSB Sort (dsb_sort.py) e o VAKM Sort (vakm_sort.py).
+
+Raciocínio Projetual do DPES:
 1. Identifica em O(N) os extremos locais (mínimo e máximo).
 2. Se min == max, o array possui todos os elementos idênticos -> encerra imediatamente em O(N).
 3. Fixa min na extremidade esquerda e max na extremidade direita.
