@@ -1,15 +1,17 @@
 # Relatório Técnico — Trabalho Prático 1 (TP1)
 ## Métodos de Ordenação Autorais: Concepção, Formalização Assintótica e Validação Empírica
 
-**Disciplina:** Análise e Projeto de Algoritmos (APA)  
-**Semestre/Ano:** 2026/2  
-**Modelo de Avaliação:** $N/2$ Algoritmos Autorais (Opção A — Relatório Técnico Completo)  
-**Autores:**  
-- [Fade Kanaan]  
-- [Gabriel Fernandes dos Anjos]  
-- [Gabriel Ortiz]  
-- [Leonardo Dorneles] 
-- [Rodrigo Thoma] 
+**Disciplina:** Análise e Projeto de Algoritmos (APA)
+**Semestre/Ano:** 2026/2
+**Modelo de Avaliação:** $N/2$ Algoritmos Autorais (Opção A — Relatório Técnico Completo)
+**Autores:**
+- [Fade Kanaan]
+- [Gabriel Fernandes dos Anjos]
+- [Gabriel Ortiz]
+- [Leonardo Dorneles]
+- [Rodrigo Thoma]
+
+> **Nota:** este documento cobre a formulação geral do problema e o **Algoritmo Autoral 1** (*Dual Selection Bubble Sort*). O **Algoritmo Autoral 2** (*Variance-Adaptive K-Way Merge Sort*, paradigma recursivo/Divisão e Conquista) tem seu próprio relatório dedicado em [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md).
 
 ---
 
@@ -27,20 +29,18 @@
    * 2.5. Exemplo Didático Rastreável Passo a Passo
    * 2.6. Dedução Analítica de Complexidade no Modelo RAM
    * 2.7. Propriedades Estruturais: Estabilidade e Memória Auxiliar
-3. [Algoritmo Autoral 2: Abordagem Recursiva](#3-algoritmo-autoral-2-abordagem-recursiva)
-   * *(Seção reservada para integração da segunda proposta do grupo)*
-4. [Metodologia Experimental e Suíte de Testes](#4-metodologia-experimental-e-suíte-de-testes)
-   * 4.1. Cenários de Teste Obrigatórios e Casos Limítrofes
-   * 4.2. Protocolo de Benchmarking e Métricas Coletadas
-5. [Resultados Experimentais e Análise Comparativa](#5-resultados-experimentais-e-análise-comparativa)
-   * 5.1. Distribuição Aleatória Homogênea (`random`)
-   * 5.2. Distribuição Perfeitamente Ordenada (`sorted` — Melhor Caso)
-   * 5.3. Distribuição Estritamente Decrescente (`reverse` — Pior Caso)
-   * 5.4. Distribuição com Chaves Redundantes (`duplicates`)
-   * 5.5. Distribuição Quase Ordenada (`almost_sorted`)
-6. [Discussão Crítica e Trade-Offs](#6-discussão-crítica-e-trade-offs)
-7. [Declaração Obrigatória de Autoria e Uso de Ferramentas de IA](#7-declaração-obrigatória-de-autoria-e-uso-de-ferramentas-de-ia)
-8. [Referências Bibliográficas](#8-referências-bibliográficas)
+3. [Metodologia Experimental e Suíte de Testes](#3-metodologia-experimental-e-suíte-de-testes)
+   * 3.1. Cenários de Teste Obrigatórios e Casos Limítrofes
+   * 3.2. Protocolo de Benchmarking e Métricas Coletadas
+4. [Resultados Experimentais e Análise Comparativa](#4-resultados-experimentais-e-análise-comparativa)
+   * 4.1. Distribuição Aleatória Homogênea (`random`)
+   * 4.2. Distribuição Perfeitamente Ordenada (`sorted` — Melhor Caso)
+   * 4.3. Distribuição Estritamente Decrescente (`reverse` — Pior Caso)
+   * 4.4. Distribuição com Chaves Redundantes (`duplicates`)
+   * 4.5. Distribuição Quase Ordenada (`almost_sorted`)
+5. [Discussão Crítica e Trade-Offs](#5-discussão-crítica-e-trade-offs)
+6. [Declaração Obrigatória de Autoria e Uso de Ferramentas de IA](#6-declaração-obrigatória-de-autoria-e-uso-de-ferramentas-de-ia)
+7. [Referências Bibliográficas](#7-referências-bibliográficas)
 
 ---
 
@@ -61,8 +61,8 @@ Para a dedução formal das complexidades assintóticas ($O, \Omega, \Theta$), a
 
 ### 1.3. Escopo dos Métodos Autorais do Trabalho
 Conforme o regulamento do TP1 sob o modelo de avaliação $N/2$ integrantes, este trabalho propõe e analisa criticamente dois métodos autorais baseados em paradigmas complementares:
-1. **Algoritmo 1 (Iterativo / In-Place):** *Dual Selection Bubble Sort (DSB Sort)* — foco em baixo consumo de memória ($O(1)$) e sensibilidade adaptativa.
-2. **Algoritmo 2 (Recursivo / Divisão e Conquista):** *(A ser integrado na sequência pelo grupo)*.
+1. **Algoritmo 1 (Iterativo / In-Place):** *Dual Selection Bubble Sort (DSB Sort)* — foco em baixo consumo de memória ($O(1)$) e sensibilidade adaptativa. Formalizado neste documento (Seção 2).
+2. **Algoritmo 2 (Recursivo / Divisão e Conquista):** *Variance-Adaptive K-Way Merge Sort (VAKM Sort)* — generalização do Merge Sort binário para um fator de ramificação $k$ variável, decidido dinamicamente pela dispersão estatística dos dados de cada segmento. Formalizado no documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md).
 
 ---
 
@@ -166,31 +166,31 @@ fim-procedimento
 
 A prova de corretude formal do DSB Sort baseia-se na formulação de um **Invariante de Laço** rigoroso para o laço externo `while left < right`:
 
-> **Enunciado do Invariante:**  
-> *No início de cada iteração do laço externo, delimitada pelos índices $left$ e $right$:*  
-> 1. *O subvetor prefixo $A[0 \dots left-1]$ contém os $left$ menores elementos do vetor original dispostos em ordem monotonicamente crescente ($A[0] \le A[1] \le \dots \le A[left-1]$).*  
-> 2. *O subvetor sufixo $A[right+1 \dots N-1]$ contém os $N - 1 - right$ maiores elementos do vetor original dispostos em ordem monotonicamente crescente ($A[right+1] \le \dots \le A[N-1]$).*  
-> 3. *Todo elemento pertencente à janela ativa $A[left \dots right]$ satisfaz a relação de confinamento de faixa:*  
+> **Enunciado do Invariante:**
+> *No início de cada iteração do laço externo, delimitada pelos índices $left$ e $right$:*
+> 1. *O subvetor prefixo $A[0 \dots left-1]$ contém os $left$ menores elementos do vetor original dispostos em ordem monotonicamente crescente ($A[0] \le A[1] \le \dots \le A[left-1]$).*
+> 2. *O subvetor sufixo $A[right+1 \dots N-1]$ contém os $N - 1 - right$ maiores elementos do vetor original dispostos em ordem monotonicamente crescente ($A[right+1] \le \dots \le A[N-1]$).*
+> 3. *Todo elemento pertencente à janela ativa $A[left \dots right]$ satisfaz a relação de confinamento de faixa:*
 >    $$\forall x \in A[left \dots right]: \quad A[left - 1] \le x \le A[right + 1]$$
 
 #### Prova Formal por Indução Matemática:
 
-* **1. Inicialização:**  
-  Antes da primeira iteração, $left = 0$ e $right = N - 1$.  
+* **1. Inicialização:**
+  Antes da primeira iteração, $left = 0$ e $right = N - 1$.
   Os subvetores $A[0 \dots -1]$ e $A[N \dots N-1]$ são vazios, satisfazendo trivialmente as propriedades (1) e (2). O vetor inteiro $A[0 \dots N-1]$ é a janela ativa inicial, satisfazendo a propriedade (3). O invariante é verdadeiro antes do início.
 
-* **2. Manutenção:**  
-  Assuma que o invariante é válido no início de uma iteração qualquer com janela $[left, right]$.  
-  O laço interno inspeciona cada elemento $A[j]$ com $j \in [left, right]$, localizando com exatidão o índice $min\_idx$ do menor valor e $max\_idx$ do maior valor daquela janela.  
+* **2. Manutenção:**
+  Assuma que o invariante é válido no início de uma iteração qualquer com janela $[left, right]$.
+  O laço interno inspeciona cada elemento $A[j]$ com $j \in [left, right]$, localizando com exatidão o índice $min\_idx$ do menor valor e $max\_idx$ do maior valor daquela janela.
   * Ao posicionar $A[min\_idx]$ em $A[left]$, garante-se que $A[left]$ é menor ou igual a todos os elementos restantes em $A[left+1 \dots right]$. Pela hipótese de indução, $A[left]$ já era maior ou igual a $A[left-1]$. Portanto, o prefixo ordenado expande validamente para $A[0 \dots left]$.
-  * Analogamente, o ajuste de ponteiro (`se max_idx == left então max_idx = min_idx`) assegura que a referência ao maior elemento permaneça consistente antes da segunda troca. Ao posicionar $A[max\_idx]$ em $A[right]$, o sufixo ordenado expande validamente para $A[right \dots N-1]$.  
+  * Analogamente, o ajuste de ponteiro (`se max_idx == left então max_idx = min_idx`) assegura que a referência ao maior elemento permaneça consistente antes da segunda troca. Ao posicionar $A[max\_idx]$ em $A[right]$, o sufixo ordenado expande validamente para $A[right \dots N-1]$.
   Ao final da iteração, incrementa-se $left$ e decrementa-se $right$. No início da iteração seguinte, o novo prefixo $A[0 \dots left'-1]$ e o novo sufixo $A[right'+1 \dots N-1]$ permanecem estritamente ordenados e confinando o miolo restante. O invariante mantém-se verdadeiro.
 
-* **3. Término:**  
+* **3. Término:**
   O laço encerra por uma de três condições:
   * *(a) Convergência:* $left \ge right$. A janela ativa torna-se vazia ($left > right$) ou unitária ($left = right$). Em ambos os casos, a junção do prefixo ordenado com o sufixo ordenado cobre $100\%$ dos $N$ elementos, garantindo a permutação totalmente classificada.
   * *(b) Parada antecipada por ordenação:* A flag $esta\_ordenado$ permanece verdadeira se nenhum par consecutivo em $A[left \dots right]$ violar a ordem. O miolo já está classificado, e como é limitado por $A[left-1]$ e $A[right+1]$, o vetor global está ordenado.
-  * *(c) Parada por colisão:* $A[min\_idx] == A[max\_idx]$. Todos os elementos em $A[left \dots right]$ são idênticos entre si, estando mutuamente ordenados.  
+  * *(c) Parada por colisão:* $A[min\_idx] == A[max\_idx]$. Todos os elementos em $A[left \dots right]$ são idênticos entre si, estando mutuamente ordenados.
   **Conclusão:** O algoritmo encerra em tempo finito e o vetor de saída é uma permutação estritamente ordenada do vetor de entrada. $\blacksquare$
 
 ---
@@ -237,7 +237,7 @@ Considere o vetor numérico de entrada: $A = [9, 2, 7, 1, 8, 3]$ ($N = 6$).
   * Troca 2 (Máximo): $max\_idx == right$ ($3 == 3$) $\to$ nenhuma troca necessária.
   * Atualização de ponteiros: $left = 3$, $right = 2$.
 
-* **Encerramento:** $left > right$ ($3 > 2$). O algoritmo finaliza.  
+* **Encerramento:** $left > right$ ($3 > 2$). O algoritmo finaliza.
   **Vetor Final Ordenado:** $[1, 2, 3, 7, 8, 9]$.
 
 ---
@@ -281,21 +281,21 @@ $$T_{medio}(N) = \Theta(N^2)$$
 
 ### 2.7. Propriedades Estruturais: Estabilidade e Memória Auxiliar
 
-* **Operação In-Place:**  
-  O algoritmo requer apenas variáveis de controle de índices e flags (`left`, `right`, `min_idx`, `max_idx`, `is_sorted`). Não utiliza nenhum vetor ou estrutura de dados proporcional a $N$.  
+* **Operação In-Place:**
+  O algoritmo requer apenas variáveis de controle de índices e flags (`left`, `right`, `min_idx`, `max_idx`, `is_sorted`). Não utiliza nenhum vetor ou estrutura de dados proporcional a $N$.
   $$\text{Memória Auxiliar Extra: } O(1) \quad (\text{Estritamente In-Place})$$
 
-* **Estabilidade:**  
-  **Não Estável.** A troca de elementos distantes nas posições $min\_idx$ e $max\_idx$ com as extremidades $left$ e $right$ pode inverter a ordem relativa original entre chaves com valores idênticos.  
+* **Estabilidade:**
+  **Não Estável.** A troca de elementos distantes nas posições $min\_idx$ e $max\_idx$ com as extremidades $left$ e $right$ pode inverter a ordem relativa original entre chaves com valores idênticos.
   *Exemplo de Instabilidade:* Considere o vetor de chaves com registros etiquetados:
   $$[\mathbf{5_a}, 3, \mathbf{5_b}, 1]$$
   Na 1ª iteração, o mínimo $1$ é trocado com $left$ ($0$), movendo $\mathbf{5_a}$ para o final. A ordem relativa entre $\mathbf{5_a}$ e $\mathbf{5_b}$ é invertida.
 
 ---
 
-## 4. Metodologia Experimental e Suíte de Testes
+## 3. Metodologia Experimental e Suíte de Testes
 
-### 4.1. Cenários de Teste Obrigatórios e Casos Limítrofes
+### 3.1. Cenários de Teste Obrigatórios e Casos Limítrofes
 Para validação rigorosa da corretude funcional e estresse dos algoritmos, foi implementada uma suíte automatizada em Python (`test_suite.py`) contemplando 10 cenários compulsórios:
 
 1. **Vetor Vazio ($N = 0$):** Validação de comportamento assintótico de borda e ausência de exceções (`IndexError`).
@@ -311,17 +311,27 @@ Para validação rigorosa da corretude funcional e estresse dos algoritmos, foi 
 
 > **Resultado da Validação:** O DSB Sort foi submetido a todos os 10 cenários formais da suíte, obtendo **100% de aprovação (OK)**, além de ter sido validado em bateria de estresse adicional com 500 sementes aleatórias distintas.
 
+### 3.2. Protocolo de Benchmarking e Métricas Coletadas
+
+O framework `benchmark.py` executa, para cada combinação de (algoritmo, tamanho $N$, distribuição), **3 repetições estatísticas independentes** sobre datasets fixos (gerados uma única vez por repetição e reutilizados por todos os algoritmos, garantindo comparação justa), coletando:
+
+* **Tempo de execução (ms):** medido via `time.perf_counter()`, com média aritmética das repetições;
+* **Comparações:** contadas explicitamente no código de cada algoritmo, incrementadas a cada avaliação de uma relação de ordem (`<`, `>`, `==`) entre elementos do vetor;
+* **Movimentações:** contadas a cada escrita efetiva em uma posição do vetor (atribuição ou troca).
+
+Todos os resultados são validados por `assert res == sorted(data)` antes de serem registrados, garantindo que nenhuma medição de desempenho seja aceita sobre uma saída incorreta.
+
 ---
 
-## 5. Resultados Experimentais e Análise Comparativa
+## 4. Resultados Experimentais e Análise Comparativa
 
-Os benchmarks empíricos foram executados em ambiente Linux com Python 3.14 sob isolamento de CPU, com **3 repetições estatísticas independentes** por configuração.
+Os benchmarks empíricos foram executados em ambiente Windows com Python 3.12, com **3 repetições estatísticas independentes** por configuração.
 
 Abaixo são consolidados os resultados do **DSB Sort (Autoral 1)** em comparação direta com os métodos clássicos da literatura: *Bubble Sort*, *Selection Sort*, *Insertion Sort*, *Merge Sort* e *Quick Sort*.
 
 ---
 
-### 5.1. Distribuição Aleatória Homogênea (`random`)
+### 4.1. Distribuição Aleatória Homogênea (`random`)
 
 #### Tempo de Execução Médio (ms):
 | Algoritmo | N=10 | N=50 | N=100 | N=250 | N=500 | N=1000 |
@@ -345,7 +355,7 @@ Abaixo são consolidados os resultados do **DSB Sort (Autoral 1)** em comparaç�
 
 ---
 
-### 5.2. Distribuição Perfeitamente Ordenada (`sorted` — Melhor Caso)
+### 4.2. Distribuição Perfeitamente Ordenada (`sorted` — Melhor Caso)
 
 Neste cenário, evidencia-se de forma contundente o benefício da "antena" de parada antecipada do DSB Sort:
 
@@ -363,7 +373,7 @@ Neste cenário, evidencia-se de forma contundente o benefício da "antena" de pa
 
 ---
 
-### 5.3. Distribuição Estritamente Decrescente (`reverse` — Pior Caso de Estresse)
+### 4.3. Distribuição Estritamente Decrescente (`reverse` — Pior Caso de Estresse)
 
 O teste de estresse reverso evidencia a superioridade esmagadora do DSB Sort sobre os métodos clássicos baseados em trocas e inserções:
 
@@ -390,23 +400,82 @@ O teste de estresse reverso evidencia a superioridade esmagadora do DSB Sort sob
 > **Destaque Analítico Crítico:** Em $N = 1000$ invertido:
 > * O *Bubble Sort* realizou **999.000 movimentações de elementos** na memória.
 > * O *Insertion Sort* realizou **501.498 movimentações**.
-> * O **DSB Sort realizou apenas 1.000 movimentações** (exatamente $N$ movimentações)!  
+> * O **DSB Sort realizou apenas 1.000 movimentações** (exatamente $N$ movimentações)!
 > Isso representa uma **redução de 99,9% no tráfego de memória** em relação ao Bubble Sort e quase metade do tempo de CPU (13.18 ms vs 28.11 ms).
 
 ---
 
-## 6. Discussão Crítica e Trade-Offs
+### 4.4. Distribuição com Chaves Redundantes (`duplicates`)
+
+Cenário com apenas 5 valores distintos ($\{1, 2, 3, 5, 8\}$) distribuídos aleatoriamente, avaliando o comportamento dos algoritmos sob alta taxa de colisão de chaves.
+
+#### Tempo de Execução Médio (ms):
+| Algoritmo | N=10 | N=50 | N=100 | N=250 | N=500 | N=1000 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Bubble Sort | 0.005 ms | 0.094 ms | 0.369 ms | 2.485 ms | 10.704 ms | 45.154 ms |
+| Selection Sort | 0.004 ms | 0.061 ms | 0.234 ms | 1.465 ms | 6.850 ms | 27.560 ms |
+| Insertion Sort | 0.003 ms | 0.049 ms | 0.174 ms | 1.137 ms | 4.906 ms | 21.779 ms |
+| Merge Sort | 0.012 ms | 0.062 ms | 0.135 ms | 0.414 ms | 0.979 ms | 2.174 ms |
+| Quick Sort | 0.008 ms | 0.046 ms | 0.094 ms | 0.269 ms | 0.755 ms | 1.479 ms |
+| **DSB Sort (Autoral 1)** | **0.006 ms** | **0.098 ms** | **0.354 ms** | **2.255 ms** | **9.103 ms** | **40.337 ms** |
+
+#### Número Médio de Comparações:
+| Algoritmo | N=10 | N=50 | N=100 | N=250 | N=500 | N=1000 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Bubble Sort | 41 | 1.101 | 4.623 | 29.989 | 119.993 | 480.000 |
+| Selection Sort | 45 | 1.225 | 4.950 | 31.125 | 124.750 | 499.500 |
+| Insertion Sort | 23 | 516 | 2.024 | 13.161 | 48.851 | 206.031 |
+| Merge Sort | 22 | 210 | 514 | 1.606 | 3.621 | 8.141 |
+| Quick Sort | 63 | 421 | 896 | 2.537 | 5.589 | 11.810 |
+| **DSB Sort (Autoral 1)** | **85** | **1.891** | **7.439** | **46.158** | **181.913** | **727.540** |
+
+> **Destaque Analítico:** Vetores com muitos valores repetidos são o **pior cenário do DSB Sort**: como a "antena" de parada antecipada só interrompe quando a janela inteira é monotonicamente crescente, poucas repetições dispersas não bastam para ativá-la. O algoritmo realiza **727.540 comparações** em $N=1000$ — mais que o dobro do Selection Sort ($499.500$) e quase $90\times$ o Merge Sort ($8.141$) — evidenciando que a estratégia de adaptação à ordem (e não à distribuição de valores) tem um custo real em cenários de alta redundância.
+
+---
+
+### 4.5. Distribuição Quase Ordenada (`almost_sorted`)
+
+Vetor de $N$ elementos ordenados com aproximadamente 5% de trocas aleatórias pontuais, avaliando sensibilidade a pequenas perturbações locais.
+
+#### Tempo de Execução Médio (ms):
+| Algoritmo | N=10 | N=50 | N=100 | N=250 | N=500 | N=1000 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Bubble Sort | 0.003 ms | 0.038 ms | 0.235 ms | 1.706 ms | 7.378 ms | 34.505 ms |
+| Selection Sort | 0.004 ms | 0.060 ms | 0.264 ms | 1.505 ms | 8.933 ms | 26.962 ms |
+| Insertion Sort | 0.002 ms | 0.009 ms | 0.038 ms | 0.194 ms | 1.498 ms | 3.645 ms |
+| Merge Sort | 0.017 ms | 0.060 ms | 0.159 ms | 0.409 ms | 1.610 ms | 2.141 ms |
+| Quick Sort | 0.010 ms | 0.030 ms | 0.076 ms | 0.186 ms | 0.717 ms | 1.016 ms |
+| **DSB Sort (Autoral 1)** | **0.003 ms** | **0.077 ms** | **0.304 ms** | **2.109 ms** | **9.922 ms** | **37.264 ms** |
+
+#### Número Médio de Movimentações / Trocas:
+| Algoritmo | N=10 | N=50 | N=100 | N=250 | N=500 | N=1000 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Bubble Sort | 2 | 113 | 622 | 4.253 | 15.751 | 61.932 |
+| Selection Sort | 2 | 4 | 10 | 24 | 50 | 100 |
+| Insertion Sort | 19 | 155 | 509 | 2.625 | 8.874 | 32.964 |
+| Merge Sort | 34 | 286 | 672 | 1.994 | 4.488 | 9.976 |
+| Quick Sort | 2 | 4 | 31 | 96 | 237 | 581 |
+| **DSB Sort (Autoral 1)** | **2** | **4** | **10** | **24** | **50** | **100** |
+
+> **Destaque Analítico:** Este é o cenário que melhor evidencia os limites da adaptabilidade do DSB Sort. O **Insertion Sort** despenca para **3.645 ms**, mas o **DSB Sort não herda essa adaptabilidade na mesma proporção**: como as poucas trocas pontuais ficam espalhadas por todo o vetor, a "antena" de inversão é acionada em quase toda janela, mantendo o DSB Sort próximo do seu comportamento de pior caso (**37.264 ms**, comparável ao cenário `reverse`). Em compensação, o número de movimentações permanece mínimo (exatamente $N/10$, idêntico ao Selection Sort), confirmando que sua fragilidade neste cenário é de **tempo/comparações**, não de tráfego de memória.
+
+---
+
+## 5. Discussão Crítica e Trade-Offs
 
 1. **Ganhos Comprovados da Proposta Autoral:**
-   * **Superação do Selection Sort:** Elimina completamente o problema de desempenho em vetores ordenados ou quase ordenados, caindo de $\Theta(N^2)$ para $\Omega(N)$ com quase zero custo adicional.
+   * **Superação do Selection Sort:** Elimina completamente o problema de desempenho em vetores ordenados, caindo de $\Theta(N^2)$ para $\Omega(N)$ com quase zero custo adicional.
    * **Economia Extrema de Barramento de Memória:** O DSB Sort é imensamente superior ao Bubble Sort e ao Insertion Sort em número de escritas em memória, mantendo trocas estritamente lineares ($O(N)$) mesmo no pior caso de inversão total.
 2. **Limitações Identificadas (Trade-Offs Honestos):**
    * Por ter uma constante de comparações que realiza a busca de mínimo e máximo e a checagem de adjacência na mesma passada, o DSB Sort realiza aproximadamente $1.5$ a $2$ vezes mais comparações que o Selection Sort puro em vetores totalmente desordenados aleatórios.
    * Não é um algoritmo $O(N \log N)$: para $N > 5000$, métodos de Divisão e Conquista (como Quick Sort e Merge Sort) são naturalmente muito mais rápidos. O DSB Sort posiciona-se como uma técnica de ordenação in-place elementar de alta eficiência para instâncias pequenas/médias ($N \le 1000$) ou conjuntos com forte pré-ordenação.
+   * **Fraqueza em duplicatas dispersas (Seção 4.4) e em perturbações locais espalhadas (Seção 4.5):** sua "antena" de parada antecipada exige que a *janela inteira* esteja monotonicamente crescente; poucas repetições ou trocas pontuais espalhadas não bastam para ativá-la, levando ao pior número de comparações observado em todo o benchmark ($727.540$ para $N=1000$ em `duplicates`).
+
+> **Nota:** para uma discussão comparativa entre este algoritmo e o Algoritmo Autoral 2 do grupo (VAKM Sort, paradigma recursivo com adaptação por dispersão de valores em vez de ordem), ver o documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md), Seção 5.
 
 ---
 
-## 7. Declaração Obrigatória de Autoria e Uso de Ferramentas de IA
+## 6. Declaração Obrigatória de Autoria e Uso de Ferramentas de IA
 
 Conforme estabelecido nas Regras do Jogo e no edital do TP1, declara-se a utilização de ferramentas de Inteligência Artificial com a seguinte discriminação:
 
@@ -426,9 +495,11 @@ Conforme estabelecido nas Regras do Jogo e no edital do TP1, declara-se a utiliz
 5. **Validação do Resultado:**
    * Todos os resultados foram homologados contra os 10 cenários obrigatórios da suíte oficial `test_suite.py` e validados em bateria de 500 execuções com sementes aleatórias, com assertividade de 100%.
 
+> **Nota:** a declaração de autoria e uso de IA referente ao Algoritmo Autoral 2 (VAKM Sort) está no documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md), Seção 6.
+
 ---
 
-## 8. Referências Bibliográficas
+## 7. Referências Bibliográficas
 
 1. CORMEN, T. H.; LEISERSON, C. E.; RIVEST, R. L.; STEIN, C. *Algoritmos: Teoria e Prática*. 3ª ed. Rio de Janeiro: Elsevier, 2012.
 2. KNUTH, D. E. *The Art of Computer Programming, Volume 3: Sorting and Searching*. 2nd ed. Boston: Addison-Wesley, 1998.

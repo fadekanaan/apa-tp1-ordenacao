@@ -16,6 +16,7 @@ from classical import (
     selection_sort,
 )
 from dsb_sort import dsb_sort
+from vakm_sort import vakm_sort
 
 
 class BaseSortMixin:
@@ -127,6 +128,11 @@ class TestAuthorialSort(unittest.TestCase, BaseSortMixin):
 class TestDSBSort(unittest.TestCase, BaseSortMixin):
     sort_fn = staticmethod(dsb_sort)
     name = "Dual Selection Bubble Sort (DSB Sort)"
+
+
+class TestVAKMSort(unittest.TestCase, BaseSortMixin):
+    sort_fn = staticmethod(vakm_sort)
+    name = "Variance-Adaptive K-Way Merge Sort (VAKM Sort)"
 
 
 if __name__ == "__main__":
