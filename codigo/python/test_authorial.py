@@ -69,7 +69,11 @@ class TestVAKMSortSpecific(unittest.TestCase):
         self.assertEqual(sorted(data), result)
 
     def test_elementos_identicos_acima_do_threshold_param_sem_moves(self):
-        """Acima do threshold, lo == hi deve encerrar antes de dividir e mesclar."""
+        """Acima do threshold, o sensor de corridas encerra antes de dividir e mesclar.
+
+        Um segmento uniforme e monotonicamente nao decrescente, logo e interceptado
+        pelo sensor -- nao existe (nem e necessario) um teste separado de lo == hi.
+        """
         data = [7] * 17
 
         result, _, moves = vakm_sort(data)
@@ -80,7 +84,7 @@ class TestVAKMSortSpecific(unittest.TestCase):
     def test_dispersao_adapta_k_entre_tres_e_oito_partes(self):
         """Distribuições concentrada e bimodal devem escolher k distintos."""
         builtin_round = round
-        concentrated = [0] * 32 + [1000]
+        concentrated = [1000] + [0] * 31 + [1000]
         bimodal = [0, 1000] * 16 + [0]
 
         with patch("builtins.round", wraps=builtin_round) as round_spy:
