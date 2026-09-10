@@ -1,11 +1,13 @@
 """
 Framework de Benchmarking e Comparação de Algoritmos de Ordenação.
-Gera tabelas estatísticas em Markdown, CSV e gráficos comparativos PNG.
+
+Para cada combinação de (algoritmo, tamanho N, distribuição), mede tempo de
+execução, comparações de chaves e movimentações de dados, e emite as tabelas
+comparativas em Markdown mais o gráfico PNG com as curvas.
 """
 
 import argparse
 from collections import defaultdict
-import os
 import random
 import time
 from typing import Callable, Dict, List, Tuple
@@ -73,8 +75,11 @@ def run_benchmark(
             datasets = [generate_dataset(size, dist) for _ in range(trials)]
 
             for name, fn in algorithms.items():
-                # Para Bubble/Selection/Insertion/DSB, evita tamanhos excessivos que demoram muito
-                if size > 1500 and name in ("Bubble Sort", "Selection Sort", "Insertion Sort", "DSB Sort (Autoral 1)") and dist in ("random", "reverse"):
+                # Métodos quadráticos são omitidos em N grande, exceto onde possuem
+                # parada antecipada linear (distribuição já ordenada). O Selection Sort
+                # é sempre Theta(N^2), portanto é omitido em qualquer distribuição.
+                QUADRATIC = ("Bubble Sort", "Selection Sort", "Insertion Sort", "DSB Sort (Autoral 1)")
+                if size > 1500 and name in QUADRATIC and (dist != "sorted" or name == "Selection Sort"):
                     continue
 
                 times = []
@@ -104,21 +109,25 @@ def run_benchmark(
 
 
 def print_markdown_summary(results: dict, sizes: List[int]):
-    """Imprime tabela formatada em Markdown com os resultados comparativos."""
+    """
+    Imprime tabelas em Markdown para as três métricas exigidas pelo enunciado:
+    tempo de execução, comparações de chaves e movimentações de dados.
+    """
+    METRICS = (
+        ("time_ms", "Tempo de Execução Médio (ms)", lambda v: f"{v:.3f}"),
+        ("comps", "Comparações de Chaves", lambda v: f"{v:,.0f}".replace(",", ".")),
+        ("moves", "Movimentações de Dados", lambda v: f"{v:,.0f}".replace(",", ".")),
+    )
     for dist, algs in results.items():
-        print(f"\n### Resultados: Distribuição `{dist}` (Tempo em ms)")
-        header = "| Algoritmo | " + " | ".join(f"N={s}" for s in sizes) + " |"
-        sep = "| :--- | " + " | ".join(":---:" for _ in sizes) + " |"
-        print(header)
-        print(sep)
-        for alg_name, size_data in algs.items():
-            row = [alg_name]
-            for s in sizes:
-                if s in size_data:
-                    row.append(f"{size_data[s]['time_ms']:.3f} ms")
-                else:
-                    row.append("—")
-            print("| " + " | ".join(row) + " |")
+        for key, title, fmt in METRICS:
+            print(f"\n### Distribuição `{dist}` — {title}")
+            print("| Algoritmo | " + " | ".join(f"N={s}" for s in sizes) + " |")
+            print("| :--- | " + " | ".join(":---:" for _ in sizes) + " |")
+            for alg_name, size_data in algs.items():
+                row = [alg_name]
+                for s in sizes:
+                    row.append(fmt(size_data[s][key]) if s in size_data else "—")
+                print("| " + " | ".join(row) + " |")
 
 
 def plot_benchmark_results(results: dict, output_path: str = "benchmark_results.png"):
@@ -180,7 +189,7 @@ def main():
         "VAKM Sort (Autoral 2)": vakm_sort,
     }
 
-    sizes = [10, 50, 100, 250, 500, 1000]
+    sizes = [10, 100, 1000, 10000]
     distributions = ["random", "sorted", "reverse", "duplicates", "almost_sorted"]
 
     random.seed(42)
