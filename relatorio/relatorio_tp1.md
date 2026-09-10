@@ -628,25 +628,25 @@ Abaixo são consolidados os resultados do **DSB Sort (Autoral 1)** e do **DPES S
 
 | Algoritmo                 |     N=10     |     N=50     |    N=100     |    N=250     |    N=500     |    N=1000     |
 | :------------------------ | :----------: | :----------: | :----------: | :----------: | :----------: | :-----------: |
-| Bubble Sort               |   0.004 ms   |   0.060 ms   |   0.204 ms   |   1.341 ms   |   6.032 ms   |   23.805 ms   |
-| Selection Sort            |   0.003 ms   |   0.031 ms   |   0.115 ms   |   0.596 ms   |   2.772 ms   |   10.463 ms   |
-| Insertion Sort            |   0.002 ms   |   0.026 ms   |   0.110 ms   |   0.629 ms   |   2.553 ms   |   10.560 ms   |
-| Merge Sort                |   0.007 ms   |   0.035 ms   |   0.078 ms   |   0.215 ms   |   0.426 ms   |   0.919 ms    |
-| Quick Sort                |   0.005 ms   |   0.023 ms   |   0.051 ms   |   0.145 ms   |   0.316 ms   |   0.680 ms    |
-| **DSB Sort (Autoral 1)**  | **0.004 ms** | **0.052 ms** | **0.189 ms** | **1.447 ms** | **4.323 ms** | **17.487 ms** |
-| **DPES Sort (Autoral 2)** | **0.011 ms** | **0.076 ms** | **0.239 ms** | **0.581 ms** | **1.249 ms** | **3.133 ms**  |
+| Bubble Sort               |   0.006 ms   |   0.109 ms   |   0.648 ms   |   2.722 ms   |  11.652 ms   |  57.164 ms    |
+| Selection Sort            |   0.005 ms   |   0.068 ms   |   0.383 ms   |   1.389 ms   |   5.997 ms   |  25.864 ms    |
+| Insertion Sort            |   0.004 ms   |   0.066 ms   |   0.362 ms   |   1.638 ms   |   7.408 ms   |  30.655 ms    |
+| Merge Sort                |   0.014 ms   |   0.097 ms   |   0.230 ms   |   0.527 ms   |   1.131 ms   |   2.612 ms    |
+| Quick Sort                |   0.010 ms   |   0.069 ms   |   0.137 ms   |   0.426 ms   |   0.761 ms   |   1.665 ms    |
+| **DSB Sort (Autoral 1)**  | **0.007 ms** | **0.171 ms** | **0.471 ms** | **2.253 ms** | **10.588 ms**| **40.671 ms** |
+| **DPES Sort (Autoral 2)** | **0.008 ms** | **0.079 ms** | **0.148 ms** | **0.435 ms** | **1.049 ms** | **2.414 ms**  |
 
 #### Número Médio de Movimentações / Trocas:
 
 | Algoritmo                 |  N=10  |  N=50   |  N=100  |   N=250   |   N=500   |  N=1000   |
 | :------------------------ | :----: | :-----: | :-----: | :-------: | :-------: | :-------: |
-| Bubble Sort               |   49   |  1.174  |  5.073  |  30.867   |  122.941  |  504.905  |
-| Selection Sort            |   14   |   93    |   191   |    491    |    985    |   1.984   |
-| Insertion Sort            |   43   |   685   |  2.734  |  15.932   |  62.468   |  254.451  |
-| Merge Sort                |   34   |   286   |   672   |   1.994   |   4.488   |   9.976   |
-| Quick Sort                |   23   |   147   |   369   |   1.097   |   2.411   |   5.231   |
-| **DSB Sort (Autoral 1)**  | **14** | **93**  | **186** |  **494**  |  **987**  | **1.981** |
-| **DPES Sort (Autoral 2)** | **44** | **267** | **648** | **1.746** | **3.779** | **8.413** |
+| Bubble Sort               |   49   |  1174   |  5073   |  30867    | 122941    | 504905    |
+| Selection Sort            |   14   |   93    |   191   |    491    |   985     |  1984     |
+| Insertion Sort            |   43   |   685   |  2734   |  15932    |  62468    | 254451    |
+| Merge Sort                |   34   |   286   |   672   |   1994    |   4488    |  9976     |
+| Quick Sort                |   23   |   147   |   369   |   1097    |   2411    |  5231     |
+| **DSB Sort (Autoral 1)**  | **14** | **93**  | **186** |  **494**  |  **987**  | **1981**  |
+| **DPES Sort (Autoral 2)** | **43** | **284** | **629** | **1731**  | **3742**  | **8606**  |
 
 ---
 
@@ -658,15 +658,15 @@ Neste cenário, evidencia-se de forma contundente o benefício da "antena" de pa
 
 | Algoritmo                 |     N=10     |     N=50     |    N=100     |    N=250     |    N=500     |    N=1000    |
 | :------------------------ | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: |
-| Bubble Sort               |   0.001 ms   |   0.006 ms   |   0.003 ms   |   0.005 ms   |   0.013 ms   |   0.027 ms   |
-| Selection Sort            |   0.002 ms   |   0.025 ms   |   0.096 ms   |   0.580 ms   |   2.648 ms   |  11.544 ms   |
-| Insertion Sort            |   0.001 ms   |   0.002 ms   |   0.005 ms   |   0.012 ms   |   0.027 ms   |   0.057 ms   |
-| Merge Sort                |   0.006 ms   |   0.027 ms   |   0.057 ms   |   0.153 ms   |   0.382 ms   |   0.756 ms   |
-| Quick Sort                |   0.004 ms   |   0.013 ms   |   0.028 ms   |   0.071 ms   |   0.178 ms   |   0.386 ms   |
-| **DSB Sort (Autoral 1)**  | **0.001 ms** | **0.003 ms** | **0.006 ms** | **0.014 ms** | **0.032 ms** | **0.103 ms** |
-| **DPES Sort (Autoral 2)** | **0.005 ms** | **0.047 ms** | **0.109 ms** | **0.405 ms** | **1.081 ms** | **2.299 ms** |
+| Bubble Sort               |   0.002 ms   |   0.003 ms   |   0.006 ms   |   0.018 ms   |   0.031 ms   |   0.066 ms   |
+| Selection Sort            |   0.005 ms   |   0.062 ms   |   0.244 ms   |   2.092 ms   |   6.331 ms   |  26.927 ms   |
+| Insertion Sort            |   0.002 ms   |   0.006 ms   |   0.011 ms   |   0.037 ms   |   0.071 ms   |   0.150 ms   |
+| Merge Sort                |   0.019 ms   |   0.065 ms   |   0.175 ms   |   0.434 ms   |   0.953 ms   |   2.044 ms   |
+| Quick Sort                |   0.007 ms   |   0.034 ms   |   0.094 ms   |   0.191 ms   |   0.426 ms   |   0.938 ms   |
+| **DSB Sort (Autoral 1)**  | **0.002 ms** | **0.009 ms** | **0.021 ms** | **0.046 ms** | **0.081 ms** | **0.156 ms** |
+| **DPES Sort (Autoral 2)** | **0.004 ms** | **0.038 ms** | **0.115 ms** | **0.306 ms** | **0.788 ms** | **1.561 ms** |
 
-> **Destaque Analítico:** Para $N = 1000$, o _Selection Sort_ gasta **11.544 ms** (por ser obrigado a fazer $499.500$ comparações). Já o **DSB Sort** executa em apenas **0.103 ms**, sendo **mais de 110 vezes mais rápido**, comprovando experimentalmente sua complexidade de melhor caso $\Omega(N)$. O **DPES Sort** completa em **2.299 ms** — embora não tenha parada antecipada linear como o DSB, seu particionamento adaptativo ainda supera Selection, Bubble e Insertion Sort no caso ordenado.
+> **Destaque Analítico:** Para $N = 1000$, o _Selection Sort_ gasta **26.927 ms** (por ser obrigado a fazer $\approx 500.000$ comparações). Já o **DSB Sort** executa em apenas **0.156 ms**, sendo **mais de 170 vezes mais rápido**, comprovando experimentalmente sua complexidade de melhor caso $\Omega(N)$. O **DPES Sort** completa em **1.561 ms** — embora não tenha parada antecipada linear como o DSB, seu particionamento adaptativo ainda supera Selection, Bubble e Insertion Sort no caso ordenado.
 
 ---
 
@@ -678,33 +678,33 @@ O teste de estresse reverso evidencia a superioridade do **DPES Sort** (caso mé
 
 | Algoritmo                 |     N=10     |     N=50     |    N=100     |    N=250     |    N=500     |    N=1000     |
 | :------------------------ | :----------: | :----------: | :----------: | :----------: | :----------: | :-----------: |
-| Bubble Sort               |   0.007 ms   |   0.125 ms   |   0.245 ms   |   1.447 ms   |   6.447 ms   |   28.112 ms   |
-| Selection Sort            |   0.006 ms   |   0.032 ms   |   0.102 ms   |   0.610 ms   |   2.627 ms   |   10.896 ms   |
-| Insertion Sort            |   0.004 ms   |   0.050 ms   |   0.198 ms   |   1.201 ms   |   4.868 ms   |   20.522 ms   |
-| Merge Sort                |   0.011 ms   |   0.031 ms   |   0.062 ms   |   0.160 ms   |   0.340 ms   |   0.755 ms    |
-| Quick Sort                |   0.007 ms   |   0.016 ms   |   0.056 ms   |   0.226 ms   |   0.180 ms   |   0.394 ms    |
-| **DSB Sort (Autoral 1)**  | **0.004 ms** | **0.033 ms** | **0.123 ms** | **1.000 ms** | **3.119 ms** | **13.184 ms** |
-| **DPES Sort (Autoral 2)** | **0.015 ms** | **0.103 ms** | **0.129 ms** | **0.394 ms** | **1.027 ms** | **2.030 ms**  |
+| Bubble Sort               |   0.007 ms   |   0.149 ms   |   0.557 ms   |   3.720 ms   |  16.069 ms   |  73.764 ms    |
+| Selection Sort            |   0.004 ms   |   0.068 ms   |   0.253 ms   |   1.544 ms   |   6.602 ms   |  28.083 ms    |
+| Insertion Sort            |   0.005 ms   |   0.127 ms   |   0.504 ms   |   3.279 ms   |  13.484 ms   |  60.695 ms    |
+| Merge Sort                |   0.013 ms   |   0.068 ms   |   0.150 ms   |   0.432 ms   |   0.939 ms   |   2.066 ms    |
+| Quick Sort                |   0.008 ms   |   0.046 ms   |   0.079 ms   |   0.202 ms   |   0.459 ms   |   1.003 ms    |
+| **DSB Sort (Autoral 1)**  | **0.006 ms** | **0.078 ms** | **0.289 ms** | **1.715 ms** | **7.876 ms** | **29.702 ms** |
+| **DPES Sort (Autoral 2)** | **0.010 ms** | **0.060 ms** | **0.123 ms** | **0.344 ms** | **0.855 ms** | **1.698 ms**  |
 
 #### Número Médio de Movimentações / Trocas (Impacto em Memória):
 
 | Algoritmo                 |  N=10  |  N=50   |  N=100  |  N=250  |   N=500   |  N=1000   |
 | :------------------------ | :----: | :-----: | :-----: | :-----: | :-------: | :-------: |
-| Bubble Sort               |   90   |  2.450  |  9.900  | 62.250  |  249.500  |  999.000  |
-| Selection Sort            |   10   |   50    |   100   |   250   |    500    |   1.000   |
-| Insertion Sort            |   63   |  1.323  |  5.148  | 31.623  |  125.748  |  501.498  |
-| Merge Sort                |   34   |   286   |   672   |  1.994  |   4.488   |   9.976   |
-| Quick Sort                |   14   |   54    |   104   |   254   |    504    |   1.004   |
-| **DSB Sort (Autoral 1)**  | **10** | **50**  | **100** | **250** |  **500**  | **1.000** |
-| **DPES Sort (Autoral 2)** | **63** | **240** | **336** | **731** | **1.347** | **2.892** |
+| Bubble Sort               |   90   |  2450   |  9900   | 62250   | 249500    | 999000    |
+| Selection Sort            |   10   |   50    |   100   |   250   |   500     |  1000     |
+| Insertion Sort            |   63   |  1323   |  5148   | 31623   | 125748    | 501498    |
+| Merge Sort                |   34   |   286   |   672   |  1994   |  4488     |  9976     |
+| Quick Sort                |   14   |   54    |   104   |   254   |   504     |  1004     |
+| **DSB Sort (Autoral 1)**  | **10** | **50**  | **100** | **250** |  **500**  | **1000**  |
+| **DPES Sort (Autoral 2)** | **63** | **240** | **336** | **731** | **1347**  | **2892**  |
 
 > **Destaque Analítico Crítico:** Em $N = 1000$ invertido:
 >
 > - O _Bubble Sort_ realizou **999.000 movimentações de elementos** na memória.
 > - O _Insertion Sort_ realizou **501.498 movimentações**.
 > - O **DSB Sort realizou apenas 1.000 movimentações** (exatamente $N$ movimentações)!  
->   Isso representa uma **redução de 99,9% no tráfego de memória** em relação ao Bubble Sort e quase metade do tempo de CPU (13.18 ms vs 28.11 ms).
-> - O **DPES Sort** realizou **2.892 movimentações** e completou em **2.03 ms** — demonstrando a eficiência do particionamento triplo adaptativo mesmo no pior caso de entrada reversa, superando todos os algoritmos quadráticos e competindo com Quick Sort.
+>   Isso representa uma **redução de 99,9% no tráfego de memória** em relação ao Bubble Sort.
+> - O **DPES Sort** realizou **2.892 movimentações** e completou em **1.698 ms** — demonstrando a eficiência do particionamento triplo adaptativo mesmo no pior caso de entrada reversa, superando todos os algoritmos quadráticos e competindo com Quick Sort.
 
 ---
 
@@ -716,59 +716,59 @@ Cenário com muitos valores repetidos testa a robustez dos algoritmos frente a c
 
 | Algoritmo                 |     N=10     |     N=50     |    N=100     |    N=250     |     N=500     |    N=1000     |
 | :------------------------ | :----------: | :----------: | :----------: | :----------: | :-----------: | :-----------: |
-| Bubble Sort               |   0.007 ms   |   0.102 ms   |   0.453 ms   |   3.656 ms   |   13.057 ms   |   53.511 ms   |
-| Selection Sort            |   0.006 ms   |   0.075 ms   |   0.294 ms   |   2.385 ms   |   7.748 ms    |   40.450 ms   |
-| Insertion Sort            |   0.004 ms   |   0.051 ms   |   0.243 ms   |   1.411 ms   |   6.419 ms    |   31.072 ms   |
-| Merge Sort                |   0.023 ms   |   0.091 ms   |   0.200 ms   |   0.645 ms   |   1.275 ms    |   3.525 ms    |
-| Quick Sort                |   0.012 ms   |   0.061 ms   |   0.141 ms   |   0.388 ms   |   0.848 ms    |   1.876 ms    |
-| **DSB Sort (Autoral 1)**  | **0.009 ms** | **0.130 ms** | **0.526 ms** | **4.113 ms** | **13.060 ms** | **48.457 ms** |
-| **DPES Sort (Autoral 2)** | **0.007 ms** | **0.052 ms** | **0.097 ms** | **0.238 ms** | **0.482 ms**  | **0.953 ms**  |
+| Bubble Sort               |   0.005 ms   |   0.099 ms   |   0.377 ms   |   2.442 ms   |  10.303 ms    |  45.699 ms    |
+| Selection Sort            |   0.004 ms   |   0.084 ms   |   0.250 ms   |   1.718 ms   |   6.488 ms    |  27.201 ms    |
+| Insertion Sort            |   0.003 ms   |   0.098 ms   |   0.211 ms   |   1.809 ms   |   5.697 ms    |  22.685 ms    |
+| Merge Sort                |   0.014 ms   |   0.081 ms   |   0.167 ms   |   0.662 ms   |   1.122 ms    |   3.026 ms    |
+| Quick Sort                |   0.008 ms   |   0.059 ms   |   0.114 ms   |   0.327 ms   |   0.762 ms    |   2.030 ms    |
+| **DSB Sort (Autoral 1)**  | **0.006 ms** | **0.130 ms** | **0.439 ms** | **2.542 ms** | **10.704 ms** | **44.319 ms** |
+| **DPES Sort (Autoral 2)** | **0.007 ms** | **0.046 ms** | **0.078 ms** | **0.197 ms** | **0.410 ms**  | **0.816 ms**  |
 
 #### Número Médio de Movimentações / Trocas:
 
 | Algoritmo                 |  N=10  |  N=50   |  N=100  |  N=250  |   N=500   |  N=1000   |
 | :------------------------ | :----: | :-----: | :-----: | :-----: | :-------: | :-------: |
-| Bubble Sort               |   49   |  1.174  |  5.073  | 30.867  |  122.941  |  504.905  |
-| Selection Sort            |   14   |   93    |   191   |   491   |    985    |   1.984   |
-| Insertion Sort            |   43   |   685   |  2.734  | 15.932  |  62.468   |  254.451  |
-| Merge Sort                |   34   |   286   |   672   |  1.994  |   4.488   |   9.976   |
-| Quick Sort                |   23   |   147   |   369   |  1.097  |   2.411   |   5.231   |
-| **DSB Sort (Autoral 1)**  | **14** | **93**  | **186** | **494** |  **987**  | **1.981** |
-| **DPES Sort (Autoral 2)** | **30** | **190** | **272** | **554** | **1.114** | **2.134** |
+| Bubble Sort               |   35   |  1041   |  3834   | 25395   |  95066    | 405180    |
+| Selection Sort            |   12   |   75    |   153   |   391   |   811     |  1627     |
+| Insertion Sort            |   35   |   619   |  2115   | 13195   |  48531    | 204588    |
+| Merge Sort                |   34   |   286   |   672   |  1994   |  4488     |  9976     |
+| Quick Sort                |   21   |   203   |   461   |  1420   |  3361     |  7753     |
+| **DSB Sort (Autoral 1)**  | **10** | **80**  | **163** | **417** | **807**   | **1675**  |
+| **DPES Sort (Autoral 2)** | **35** | **192** | **225** | **541** | **1069**  | **2174**  |
 
-> **Destaque Analítico:** Em $N = 1000$ com muitos duplicados, o **DPES Sort** completa em **0.953 ms** com apenas **2.134 movimentações** — a detecção de segmentos uniformes ($min = max$) evita recursão desnecessária, resultando em desempenho próximo ao melhor caso. O DSB Sort, por outro lado, não se beneficia de duplicados e mantém comportamento quadrático.
+> **Destaque Analítico:** Em $N = 1000$ com muitos duplicados, o **DPES Sort** completa em **0.816 ms** com apenas **2.174 movimentações** — a detecção de segmentos uniformes ($min = max$) evita recursão desnecessária, resultando em desempenho próximo ao melhor caso. O DSB Sort, por outro lado, não se beneficia de duplicados e mantém comportamento quadrático.
 
 ---
 
 ### 5.5. Distribuição Quase Ordenada (`almost_sorted`)
 
-Vetores com 95% de ordenação prévia testam a adaptabilidade. O DSB Sort brilla pela parada antecipada; o DPES Sort beneficia-se de partições pequenas e recursão rasa:
+Vetores com 95% de ordenação prévia testam a adaptabilidade. O DSB Sort brilha pela parada antecipada; o DPES Sort beneficia-se de partições pequenas e recursão rasa:
 
 #### Tempo de Execução Médio (ms):
 
 | Algoritmo                 |     N=10     |     N=50     |    N=100     |    N=250     |     N=500     |    N=1000     |
 | :------------------------ | :----------: | :----------: | :----------: | :----------: | :-----------: | :-----------: |
-| Bubble Sort               |   0.005 ms   |   0.039 ms   |   0.206 ms   |   1.813 ms   |   9.958 ms    |   40.529 ms   |
-| Selection Sort            |   0.005 ms   |   0.072 ms   |   0.278 ms   |   1.771 ms   |   8.191 ms    |   36.475 ms   |
-| Insertion Sort            |   0.003 ms   |   0.010 ms   |   0.035 ms   |   0.276 ms   |   0.997 ms    |   4.275 ms    |
-| Merge Sort                |   0.022 ms   |   0.082 ms   |   0.187 ms   |   0.565 ms   |   1.513 ms    |   2.743 ms    |
-| Quick Sort                |   0.009 ms   |   0.040 ms   |   0.097 ms   |   0.230 ms   |   0.701 ms    |   1.170 ms    |
-| **DSB Sort (Autoral 1)**  | **0.007 ms** | **0.139 ms** | **0.498 ms** | **3.216 ms** | **10.304 ms** | **46.741 ms** |
-| **DPES Sort (Autoral 2)** | **0.006 ms** | **0.048 ms** | **0.112 ms** | **0.708 ms** | **1.020 ms**  | **2.228 ms**  |
+| Bubble Sort               |   0.003 ms   |   0.033 ms   |   0.238 ms   |   1.625 ms   |   8.053 ms    |  33.519 ms    |
+| Selection Sort            |   0.004 ms   |   0.061 ms   |   0.238 ms   |   1.434 ms   |   6.278 ms    |  25.989 ms    |
+| Insertion Sort            |   0.002 ms   |   0.009 ms   |   0.036 ms   |   0.239 ms   |   0.962 ms    |   3.945 ms    |
+| Merge Sort                |   0.013 ms   |   0.064 ms   |   0.152 ms   |   0.466 ms   |   1.085 ms    |   2.390 ms    |
+| Quick Sort                |   0.006 ms   |   0.032 ms   |   0.075 ms   |   0.202 ms   |   0.474 ms    |   1.098 ms    |
+| **DSB Sort (Autoral 1)**  | **0.003 ms** | **0.094 ms** | **0.323 ms** | **2.306 ms** | **9.997 ms**  | **38.244 ms** |
+| **DPES Sort (Autoral 2)** | **0.004 ms** | **0.040 ms** | **0.092 ms** | **0.339 ms** | **0.898 ms**  | **1.913 ms**  |
 
 #### Número Médio de Movimentações / Trocas:
 
 | Algoritmo                 |  N=10  |  N=50  |  N=100  |  N=250  |   N=500   |  N=1000   |
 | :------------------------ | :----: | :----: | :-----: | :-----: | :-------: | :-------: |
-| Bubble Sort               |   49   | 1.174  |  5.073  | 30.867  |  122.941  |  504.905  |
-| Selection Sort            |   14   |   93   |   191   |   491   |    985    |   1.984   |
-| Insertion Sort            |   43   |  685   |  2.734  | 15.932  |  62.468   |  254.451  |
-| Merge Sort                |   34   |  286   |   672   |  1.994  |   4.488   |   9.976   |
-| Quick Sort                |   23   |  147   |   369   |  1.097  |   2.411   |   5.231   |
-| **DSB Sort (Autoral 1)**  | **14** | **93** | **186** | **494** |  **987**  | **1.981** |
-| **DPES Sort (Autoral 2)** | **19** | **90** | **217** | **837** | **2.143** | **5.449** |
+| Bubble Sort               |   9    |   74   |   505   |  3580   |  15426    |  63093    |
+| Selection Sort            |   1    |   3    |   10    |   24    |   50      |  100      |
+| Insertion Sort            |   22   |  135   |   450   |  2288   |  8711     |  33545    |
+| Merge Sort                |   34   |  286   |   672   |  1994   |  4488     |  9976     |
+| Quick Sort                |   1    |   3    |   11    |   77    |  186      |  488      |
+| **DSB Sort (Autoral 1)**  | **1**  | **3**  | **10**  | **24**  | **50**    | **100**   |
+| **DPES Sort (Autoral 2)** | **22** | **106**| **239** | **862** | **1973**  | **5524**  |
 
-> **Destaque Analítico:** Em $N = 1000$ quase ordenado, o **DSB Sort** aproveita a flag `is_sorted` para terminar em $\Omega(N)$ (46.7 ms), enquanto o **DPES Sort** atinge **2.228 ms** — sua recursão processa partições pequenas e balanceadas, com o Insertion Sort fallback resolvendo a base eficientemente. Ambos superam Selection e Bubble Sort; o DPES aproxima-se do Quick Sort.
+> **Destaque Analítico:** Em $N = 1000$ quase ordenado, o **DSB Sort** aproveita a flag `is_sorted` para terminar em $\Omega(N)$ (38.2 ms), enquanto o **DPES Sort** atinge **1.913 ms** — sua recursão processa partições pequenas e balanceadas, com o Insertion Sort fallback resolvendo a base eficientemente. Ambos superam Selection e Bubble Sort; o DPES aproxima-se do Quick Sort.
 
 ---
 
@@ -791,9 +791,9 @@ Vetores com 95% de ordenação prévia testam a adaptabilidade. O DSB Sort brill
 **Ganhos Comprovados:**
 
 - **Complexidade $O(N \log N)$ no caso médio:** O particionamento triplo com pivôs adaptativos por interpolação produz partições balanceadas em dados uniformes e aleatórios, superando todos os algoritmos quadráticos ($O(N^2)$) para $N \ge 100$.
-- **Detecção antecipada de uniformidade:** Segmentos com todos os elementos iguais ($min = max$) são resolvidos em tempo linear sem recursão adicional — vantagem crítica em dados com muitos duplicados (0.95 ms vs 48.5 ms do DSB em $N=1000$).
+- **Detecção antecipada de uniformidade:** Segmentos com todos os elementos iguais ($min = max$) são resolvidos em tempo linear sem recursão adicional — vantagem crítica em dados com muitos duplicados (0.816 ms vs 44.3 ms do DSB em $N=1000$).
 - **Fallback para Insertion Sort ($n \le 16$):** Elimina overhead de recursão em partições pequenas, melhorando constante prática e localidade de cache.
-- **Competitividade com Quick Sort:** Em dados aleatórios, o DPES completa em **3.13 ms** vs **0.68 ms** do Quick Sort ($N=1000$) — diferença de ~4,6×. Em reverso, **2.03 ms** vs **0.39 ms** — o Quick Sort mantém vantagem por pivôs posicionais robustos (mediana-de-três), mas o DPES evita degradação quadrática e supera todos os métodos $O(N^2)$.
+- **Competitividade com Quick Sort:** Em dados aleatórios, o DPES completa em **2.41 ms** vs **1.67 ms** do Quick Sort ($N=1000$) — diferença de ~1,4×. Em reverso, **1.70 ms** vs **1.00 ms** — o Quick Sort mantém vantagem por pivôs posicionais robustos (mediana-de-três), mas o DPES evita degradação quadrática e supera todos os métodos $O(N^2)$.
 
 **Limitações (Trade-Offs Honestos):**
 
