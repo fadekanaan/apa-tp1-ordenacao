@@ -61,16 +61,16 @@ apa-tp1-ordenacao/
 
 ## 🚀 Como Executar
 
-### 1. Testes de Corretude (Suíte Obrigatória)
+### 1. Testes de Corretude
 
-Valida o comportamento dos algoritmos contra cenários de borda (vazio, elemento único, ordenado, estritamente reverso, duplicados e aleatórios):
+Valida os algoritmos contra os cenários de borda exigidos pelo enunciado (vazio, elemento único, ordenado, estritamente reverso, duplicados e aleatórios), mais os testes específicos dos métodos autorais (paradas antecipadas, adaptação de $k$ e estabilidade):
 
 ```bash
-# Executar suíte de testes via UV
-uv run python codigo/python/test_suite.py
-
-# Ou via Makefile
+# As duas suítes de uma vez — 88 testes
 make -C codigo test
+
+# Ou apenas a suíte obrigatória — 80 testes
+uv run python codigo/python/test_suite.py
 ```
 
 ### 2. Benchmarks e Comparação de Desempenho
