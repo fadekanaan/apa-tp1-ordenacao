@@ -6,12 +6,12 @@
 **Semestre/Ano:** 2026/2  
 **Modelo de Avaliação:** $N/2$ Algoritmos Autorais (Opção A — Relatório Técnico Completo)  
 **Autores:**
-
 - [Fade Kanaan]
 - [Gabriel Fernandes dos Anjos]
 - [Gabriel Ortiz]
 - [Leonardo Dorneles]
 - [Rodrigo Thoma]
+> **Nota:** este documento cobre a formulação geral do problema, o **Algoritmo Autoral 1** (*Dual Selection Bubble Sort*) e o **Algoritmo Autoral 2 (variante DPES)** (*Dual-Pivot Extremes Sieve Sort*, Seção 3). O **Algoritmo Autoral 2 (variante VAKM)** (*Variance-Adaptive K-Way Merge Sort*, paradigma recursivo/Divisão e Conquista) tem seu próprio relatório dedicado em [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md).
 
 ---
 
@@ -53,6 +53,8 @@
 7. [Declaração Obrigatória de Autoria e Uso de Ferramentas de IA](#7-declaração-obrigatória-de-autoria-e-uso-de-ferramentas-de-ia)
 8. [Referências Bibliográficas](#8-referências-bibliográficas)
 
+> **Nota:** o Algoritmo Autoral 2 (variante VAKM — *Variance-Adaptive K-Way Merge Sort*) está documentado em [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md).
+
 ---
 
 ## 1. Resumo Executivo e Formulação do Problema
@@ -78,7 +80,8 @@ Para a dedução formal das complexidades assintóticas ($O, \Omega, \Theta$), a
 Conforme o regulamento do TP1 sob o modelo de avaliação $N/2$ integrantes, este trabalho propõe e analisa criticamente dois métodos autorais baseados em paradigmas complementares:
 
 1. **Algoritmo 1 (Iterativo / In-Place):** _Dual Selection Bubble Sort (DSB Sort)_ — foco em baixo consumo de memória ($O(1)$) e sensibilidade adaptativa.
-2. **Algoritmo 2 (Recursivo / Divisão e Conquista):** _Dual-Pivot Extremes Sieve Sort (DPES Sort)_ — partição tripla com pivôs adaptativos por interpolação de faixa, _fallback_ para Insertion Sort em partições pequenas ($\le 16$) e detecção antecipada de segmentos uniformes.
+2. **Algoritmo 2 — variante DPES (Recursivo / Divisão e Conquista):** _Dual-Pivot Extremes Sieve Sort (DPES Sort)_ — partição tripla com pivôs adaptativos por interpolação de faixa, _fallback_ para Insertion Sort em partições pequenas ($\le 16$) e detecção antecipada de segmentos uniformes. Formalizado neste documento (Seção 3).
+3. **Algoritmo 2 — variante VAKM (Recursivo / Divisão e Conquista):** _Variance-Adaptive K-Way Merge Sort (VAKM Sort)_ — generalização do Merge Sort binário para um fator de ramificação $k$ variável, decidido dinamicamente pela dispersão estatística dos dados de cada segmento. Formalizado no documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md).
 
 ---
 
@@ -596,7 +599,6 @@ Seja $n = high - low + 1$ o tamanho do segmento na chamada atual.
 ## 4. Metodologia Experimental e Suíte de Testes
 
 ### 4.1. Cenários de Teste Obrigatórios e Casos Limítrofes
-
 Para validação rigorosa da corretude funcional e estresse dos algoritmos, foi implementada uma suíte automatizada em Python (`test_suite.py`) contemplando 10 cenários compulsórios:
 
 1. **Vetor Vazio ($N = 0$):** Validação de comportamento assintótico de borda e ausência de exceções (`IndexError`).
@@ -612,13 +614,23 @@ Para validação rigorosa da corretude funcional e estresse dos algoritmos, foi 
 
 > **Resultado da Validação:** O **DSB Sort** e o **DPES Sort** foram submetidos a todos os 10 cenários formais da suíte, obtendo **100% de aprovação (OK)** em ambos, além de terem sido validados em bateria de estresse adicional com 500 sementes aleatórias distintas.
 
+### 4.2. Protocolo de Benchmarking e Métricas Coletadas
+
+O framework `benchmark.py` executa, para cada combinação de (algoritmo, tamanho $N$, distribuição), **3 repetições estatísticas independentes** sobre datasets fixos (gerados uma única vez por repetição e reutilizados por todos os algoritmos, garantindo comparação justa), coletando:
+
+* **Tempo de execução (ms):** medido via `time.perf_counter()`, com média aritmética das repetições;
+* **Comparações:** contadas explicitamente no código de cada algoritmo, incrementadas a cada avaliação de uma relação de ordem (`<`, `>`, `==`) entre elementos do vetor;
+* **Movimentações:** contadas a cada escrita efetiva em uma posição do vetor (atribuição ou troca).
+
+Todos os resultados são validados por `assert res == sorted(data)` antes de serem registrados, garantindo que nenhuma medição de desempenho seja aceita sobre uma saída incorreta.
+
 ---
 
 ## 5. Resultados Experimentais e Análise Comparativa
 
-Os benchmarks empíricos foram executados em ambiente Linux com Python 3.14 sob isolamento de CPU, com **3 repetições estatísticas independentes** por configuração.
+Os benchmarks empíricos foram executados em ambiente Windows com Python 3.12, com **3 repetições estatísticas independentes** por configuração.
 
-Abaixo são consolidados os resultados do **DSB Sort (Autoral 1)** e do **DPES Sort (Autoral 2)** em comparação direta com os métodos clássicos da literatura: _Bubble Sort_, _Selection Sort_, _Insertion Sort_, _Merge Sort_ e _Quick Sort_.
+Abaixo são consolidados os resultados do **DSB Sort (Autoral 1)** e do **DPES Sort (Autoral 2)** em comparação direta com os métodos clássicos da literatura: _Bubble Sort_, _Selection Sort_, _Insertion Sort_, _Merge Sort_ e _Quick Sort_. Os resultados do **VAKM Sort (variante do Algoritmo Autoral 2)** estão consolidados no documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md).
 
 ---
 
@@ -738,6 +750,19 @@ Cenário com muitos valores repetidos testa a robustez dos algoritmos frente a c
 
 > **Destaque Analítico:** Em $N = 1000$ com muitos duplicados, o **DPES Sort** completa em **0.816 ms** com apenas **2.174 movimentações** — a detecção de segmentos uniformes ($min = max$) evita recursão desnecessária, resultando em desempenho próximo ao melhor caso. O DSB Sort, por outro lado, não se beneficia de duplicados e mantém comportamento quadrático.
 
+#### Número Médio de Comparações (dados complementares com instrumentação explícita):
+
+| Algoritmo | N=10 | N=50 | N=100 | N=250 | N=500 | N=1000 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Bubble Sort | 41 | 1.101 | 4.623 | 29.989 | 119.993 | 480.000 |
+| Selection Sort | 45 | 1.225 | 4.950 | 31.125 | 124.750 | 499.500 |
+| Insertion Sort | 23 | 516 | 2.024 | 13.161 | 48.851 | 206.031 |
+| Merge Sort | 22 | 210 | 514 | 1.606 | 3.621 | 8.141 |
+| Quick Sort | 63 | 421 | 896 | 2.537 | 5.589 | 11.810 |
+| **DSB Sort (Autoral 1)** | **85** | **1.891** | **7.439** | **46.158** | **181.913** | **727.540** |
+
+> **Destaque Analítico:** Vetores com muitos valores repetidos são o **pior cenário do DSB Sort**: como a "antena" de parada antecipada só interrompe quando a janela inteira é monotonicamente crescente, poucas repetições dispersas não bastam para ativá-la. O algoritmo realiza **727.540 comparações** em $N=1000$ — mais que o dobro do Selection Sort ($499.500$) e quase $90\times$ o Merge Sort ($8.141$) — evidenciando que a estratégia de adaptação à ordem (e não à distribuição de valores) tem um custo real em cenários de alta redundância.
+
 ---
 
 ### 5.5. Distribuição Quase Ordenada (`almost_sorted`)
@@ -770,6 +795,10 @@ Vetores com 95% de ordenação prévia testam a adaptabilidade. O DSB Sort brilh
 
 > **Destaque Analítico:** Em $N = 1000$ quase ordenado, o **DSB Sort** aproveita a flag `is_sorted` para terminar em $\Omega(N)$ (38.2 ms), enquanto o **DPES Sort** atinge **1.913 ms** — sua recursão processa partições pequenas e balanceadas, com o Insertion Sort fallback resolvendo a base eficientemente. Ambos superam Selection e Bubble Sort; o DPES aproxima-se do Quick Sort.
 
+> **Nota complementar (sensibilidade a perturbações locais):** Este é o cenário que melhor evidencia os limites da adaptabilidade do DSB Sort. O **Insertion Sort** despenca para **3.945 ms**, mas o **DSB Sort não herda essa adaptabilidade na mesma proporção**: como as poucas trocas pontuais ficam espalhadas por todo o vetor, a "antena" de inversão é acionada em quase toda janela, mantendo o DSB Sort próximo do seu comportamento de pior caso (**38.244 ms**, comparável ao cenário `reverse`). Em compensação, o número de movimentações permanece mínimo (exatamente $N/10$, idêntico ao Selection Sort), confirmando que sua fragilidade neste cenário é de **tempo/comparações**, não de tráfego de memória.
+
+---
+
 ---
 
 ## 6. Discussão Crítica e Trade-Offs
@@ -785,6 +814,7 @@ Vetores com 95% de ordenação prévia testam a adaptabilidade. O DSB Sort brilh
 
 - Por ter uma constante de comparações que realiza a busca de mínimo e máximo e a checagem de adjacência na mesma passada, o DSB Sort realiza aproximadamente $1.5$ a $2$ vezes mais comparações que o Selection Sort puro em vetores totalmente desordenados aleatórios.
 - Não é um algoritmo $O(N \log N)$: para $N > 5000$, métodos de Divisão e Conquista (como Quick Sort e Merge Sort) são naturalmente muito mais rápidos. O DSB Sort posiciona-se como uma técnica de ordenação in-place elementar de alta eficiência para instâncias pequenas/médias ($N \le 1000$) ou conjuntos com forte pré-ordenação.
+- **Fraqueza em duplicatas dispersas (Seção 5.4) e em perturbações locais espalhadas (Seção 5.5):** sua "antena" de parada antecipada exige que a *janela inteira* esteja monotonicamente crescente; poucas repetições ou trocas pontuais espalhadas não bastam para ativá-la, levando ao pior número de comparações observado em todo o benchmark ($727.540$ para $N=1000$ em `duplicates`).
 
 ### 6.2. DPES Sort (Autoral 2 — Recursivo / Divisão e Conquista)
 
@@ -818,6 +848,8 @@ Vetores com 95% de ordenação prévia testam a adaptabilidade. O DSB Sort brilh
 
 **Conclusão Sintética:** Os dois algoritmos são **complementares**. O DSB Sort é ideal quando se espera pré-ordenação forte ou restrição estrita de memória ($O(1)$). O DPES Sort é a escolha geral para dados arbitrários de tamanho médio/grande, oferecendo complexidade $O(N \log N)$ com pivôs adaptativos que mitigam o pior caso do Quick Sort clássico.
 
+> **Nota:** para uma discussão comparativa entre este algoritmo e o Algoritmo Autoral 2 do grupo (VAKM Sort, paradigma recursivo com adaptação por dispersão de valores em vez de ordem), ver o documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md), Seção 5.
+
 ---
 
 ## 7. Declaração Obrigatória de Autoria e Uso de Ferramentas de IA
@@ -839,6 +871,8 @@ Conforme estabelecido nas Regras do Jogo e no edital do TP1, declara-se a utiliz
    - A análise de limites assintóticos foi deduzida e fundamentada passo a passo no modelo RAM.
 5. **Validação do Resultado:**
    - Todos os resultados foram homologados contra os 10 cenários obrigatórios da suíte oficial `test_suite.py` e validados em bateria de 500 execuções com sementes aleatórias, com assertividade de 100%.
+
+> **Nota:** a declaração de autoria e uso de IA referente ao Algoritmo Autoral 2 (VAKM Sort) está no documento dedicado [`relatorio_tp1_algoritmo2_vakm_sort.md`](./relatorio_tp1_algoritmo2_vakm_sort.md), Seção 6.
 
 ---
 

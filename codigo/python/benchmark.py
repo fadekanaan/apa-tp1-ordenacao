@@ -27,6 +27,7 @@ from classical import (
     selection_sort,
 )
 from dsb_sort import dsb_sort
+from vakm_sort import vakm_sort
 
 
 def generate_dataset(n: int, distribution: str) -> List[int]:
@@ -177,6 +178,7 @@ def main():
         "Merge Sort": merge_sort,
         "Quick Sort": quick_sort,
         "DSB Sort (Autoral 1)": dsb_sort,
+        "VAKM Sort (Autoral 2)": vakm_sort,
         "DPES Sort (Autoral 2)": dpes_sort,
     }
 

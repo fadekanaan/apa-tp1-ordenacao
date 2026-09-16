@@ -33,24 +33,29 @@ Para garantir amplitude teórica e experimental, os dois métodos abordarão dif
 
 ```text
 apa-tp1-ordenacao/
-├── README.md                              # Este documento explicativo
-├── docs/                                  # Diretrizes e material de fundamentação
-│   ├── enunciado_tp1.md                   # Enunciado completo com regras do edital
-│   └── sintese_teorica_ordenacao_apa.md   # Síntese das aulas UNIVESP, modelo RAM e referências
-│
-├── codigo/                                # Pacote de códigos, testes e benchmarks
-│   ├── Makefile                           # Automação de testes e benchmarks
-│   ├── README.md                          # Guia detalhado de execução do código
-│   └── python/                            # Implementações em Python 3
-│       ├── classical.py                   # Baselines da literatura (Bubble, Selection, Insertion, Merge, Quick)
-│       ├── authorial.py                   # Algoritmo autoral de referência (DPES)
-│       ├── student_template.py            # Template base para os algoritmos autorais
-│       ├── metrics.py                     # Instrumentação (contagem de comparações, movimentações e tempo)
-│       ├── test_suite.py                  # Suíte com todos os cenários de teste obrigatórios
-│       └── benchmark.py                   # Framework de medição e geração de gráficos com matplotlib
-│
-└── relatorio/                             # Documentação analítica completa do trabalho
-    └── relatorio_tp1.md                   # Relatório técnico completo estruturado
+├── .gitignore                                  # Arquivos e diretórios ignorados pelo Git
+├── README.md                                   # Este documento explicativo
+├── pyproject.toml                              # Configuração e dependências do projeto Python
+├── uv.lock                                     # Versões fixadas das dependências
+├── codigo/                                     # Pacote de códigos, testes e benchmarks
+│   ├── Makefile                                # Automação de testes e benchmarks
+│   ├── README.md                               # Guia detalhado de execução do código
+│   └── python/                                 # Implementações em Python 3
+│       ├── authorial.py                        # Algoritmo autoral de referência (DPES)
+│       ├── benchmark.py                        # Framework de medição e geração de gráficos
+│       ├── classical.py                        # Algoritmos clássicos de ordenação
+│       ├── dsb_sort.py                         # Algoritmo autoral iterativo DSB Sort
+│       ├── metrics.py                          # Instrumentação de métricas
+│       ├── student_template.py                 # Template base para algoritmos autorais
+│       ├── test_authorial.py                   # Testes específicos do DSB e VAKM
+│       ├── test_suite.py                       # Suíte de testes obrigatória
+│       └── vakm_sort.py                        # Algoritmo autoral recursivo VAKM Sort
+├── docs/                                       # Diretrizes e fundamentação
+│   ├── enunciado_tp1.md                        # Enunciado completo do trabalho
+│   └── sintese_teorica_ordenacao_apa.md        # Síntese teórica sobre ordenação
+└── relatorio/                                  # Documentação analítica
+    ├── relatorio_tp1.md                        # Relatório técnico do DSB Sort
+    └── relatorio_tp1_algoritmo2_vakm_sort.md   # Relatório técnico do VAKM Sort
 ```
 
 ---
