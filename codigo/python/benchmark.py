@@ -66,7 +66,7 @@ def run_benchmark(
     results = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))
 
     for dist in distributions:
-        print(f"\n📊 Executando benchmarks para distribuição: [{dist.upper()}]")
+        print(f"\n[Benchmark] Executando benchmarks para distribuição: [{dist.upper()}]")
         for size in sizes:
             print(f"  -> Tamanho N = {size}...")
             # Gera datasets fixos por repetição para garantir comparação justa
@@ -74,6 +74,7 @@ def run_benchmark(
 
             for name, fn in algorithms.items():
                 # Para Bubble/Selection/Insertion/DSB, evita tamanhos excessivos que demoram muito
+                # DPES (Autoral 2) tem caso médio O(N log N) — não pula
                 if size > 1500 and name in ("Bubble Sort", "Selection Sort", "Insertion Sort", "DSB Sort (Autoral 1)") and dist in ("random", "reverse"):
                     continue
 
@@ -161,7 +162,7 @@ def plot_benchmark_results(results: dict, output_path: str = "benchmark_results.
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=150)
-    print(f"\n🖼️ Gráfico salvo com sucesso em: {output_path}")
+    print(f"\n[Grafico] Salvo com sucesso em: {output_path}")
 
 
 def main():
@@ -178,6 +179,7 @@ def main():
         "Quick Sort": quick_sort,
         "DSB Sort (Autoral 1)": dsb_sort,
         "VAKM Sort (Autoral 2)": vakm_sort,
+        "DPES Sort (Autoral 2)": dpes_sort,
     }
 
     sizes = [10, 50, 100, 250, 500, 1000]
