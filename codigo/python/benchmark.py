@@ -179,7 +179,7 @@ def main():
         "Quick Sort": quick_sort,
         "DSB Sort (Autoral 1)": dsb_sort,
         "VAKM Sort (Autoral 2)": vakm_sort,
-        "DPES Sort (Autoral 2)": dpes_sort,
+        "DPES Sort (Referência)": dpes_sort,
     }
 
     sizes = [10, 50, 100, 250, 500, 1000]
