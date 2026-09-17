@@ -161,6 +161,9 @@ def plot_benchmark_results(results: dict, output_path: str = "benchmark_results.
         ax_comps.legend()
 
     plt.tight_layout()
+    output_dir = os.path.dirname(output_path)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     plt.savefig(output_path, dpi=150)
     print(f"\n[Grafico] Salvo com sucesso em: {output_path}")
 

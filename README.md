@@ -37,6 +37,8 @@ apa-tp1-ordenacao/
 ├── README.md                                   # Este documento explicativo
 ├── pyproject.toml                              # Configuração e dependências do projeto Python
 ├── uv.lock                                     # Versões fixadas das dependências
+├── images/                                     # Gráficos e evidências visuais
+│   └── benchmark_results.png                   # Curvas comparativas de desempenho dos 8 algoritmos
 ├── codigo/                                     # Pacote de códigos, testes e benchmarks
 │   ├── Makefile                                # Automação de testes e benchmarks
 │   ├── README.md                               # Guia detalhado de execução do código
@@ -79,10 +81,14 @@ Executa a bateria de medições estatísticas com tamanhos crescentes de entrada
 
 ```bash
 # Executar benchmark estatístico
-uv run python codigo/python/benchmark.py --trials 3 --plot benchmark_results.png
+uv run python codigo/python/benchmark.py --trials 3 --plot images/benchmark_results.png
 
 # Ou via Makefile
 make -C codigo benchmark
 ```
+
+<p align="center">
+  <img src="images/benchmark_results.png" alt="Curvas Comparativas de Desempenho" width="90%">
+</p>
 
 ---

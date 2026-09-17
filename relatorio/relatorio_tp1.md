@@ -530,6 +530,11 @@ O framework de medição empírica (`benchmark.py`) opera sob protocolo padroniz
 
 Os ensaios foram consolidados confrontando as 8 implementações: os cinco clássicos (*Bubble*, *Selection*, *Insertion*, *Merge*, *Quick*), os dois autorais do grupo (**DSB Sort** e **VAKM Sort**) e a referência docente (**DPES Sort**).
 
+A Figura 1 consolida as curvas empíricas de tempo de execução e o volume de comparações de chaves em escala para as cinco distribuições de teste sob $N \in [10, 1000]$:
+
+![Curvas Empíricas de Tempo e Comparações](../images/benchmark_results.png)  
+*Figura 1: Curvas de desempenho (tempo médio em milissegundos e número de comparações) dos 8 algoritmos sob as cinco distribuições de teste.*
+
 ---
 
 ### 5.1. Distribuição Aleatória Homogênea (`random`)

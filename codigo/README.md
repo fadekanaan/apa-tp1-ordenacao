@@ -36,10 +36,10 @@ codigo/
 
 ### 2. Benchmarks e Comparação de Desempenho
 
-* **Executar benchmarks em Python (Gera tabelas Markdown e o gráfico `benchmark_results.png`):**
+* **Executar benchmarks em Python (Gera tabelas Markdown e o gráfico em `images/benchmark_results.png`):**
   ```bash
   make benchmark
-  # ou: uv run python python/benchmark.py --trials 3 --plot benchmark_results.png
+  # ou: uv run python python/benchmark.py --trials 3 --plot ../images/benchmark_results.png
   ```
 
 ---
