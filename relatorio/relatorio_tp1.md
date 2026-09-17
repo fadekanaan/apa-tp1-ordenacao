@@ -5,6 +5,7 @@
 **Disciplina:** Análise e Projeto de Algoritmos (APA)  
 **Semestre/Ano:** 2026/2  
 **Modelo de Avaliação:** $N/2$ Algoritmos Autorais (Opção A — Relatório Técnico Completo)  
+**Repositório Oficial:** [github.com/fadekanaan/apa-tp1-ordenacao](https://github.com/fadekanaan/apa-tp1-ordenacao)  
 **Autores:**
 - Fade Kanaan
 - Gabriel Fernandes dos Anjos
